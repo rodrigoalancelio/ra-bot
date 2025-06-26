@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-minikube
+spec:
+  containers:
+  - name: hello
+    image: busybox
+    command: ["sh", "-c", "echo Olá Minikube! && sleep 3600"]
