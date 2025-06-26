@@ -30,17 +30,28 @@ Este repositório contém o MVP do **R.A. BOT**, um sistema open-source para oti
 
 ## Estrutura de Pastas
 
-ra-bot/
-├── charts/ra-bot/ # Helm Chart
-├── docs/
-│ └── manual.md # Manual fake de suporte
-├── web/ # App Flask
-│ ├── Dockerfile
-│ └── …
-├── mysql/ # Configs e init scripts
-│ └── init.sql
-├── ansible/ # (futuro) playbooks
-├── docker-compose.yml # (dev local)
+.
+├── ansible
+│   └── playbook-init.yml
+├── charts
+│   └── ra-bot
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       └── templates
+│           └── .gitkeep
+├── docs
+│   └── manual.md
+├── images
+├── mysql
+│   └── init.sql
+├── web
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── app.py
+│   └── templates
+│       └── index.html
+├── docker-compose.yml
+├── pod-hello.yaml
 └── README.md
 
 
