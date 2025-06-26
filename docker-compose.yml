@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    environment:
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: admin
+      N8N_BASIC_AUTH_PASSWORD: senha123
+      DB_SQLITE_DATABASE: /data/n8n.sqlite
+    volumes:
+      - ./data/n8n:/data
+
+  web:
+    build: ./web
+    ports:
+      - "8080:80"
+    depends_on:
+      - n8n

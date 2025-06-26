@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>R.A. BOT Chat</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+    #chat { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; }
+    .msg { margin: 5px 0; }
+    .user { text-align: right; color: blue; }
+    .bot  { text-align: left; color: green; }
+    #input { width: calc(100% - 90px); }
+  </style>
+</head>
+<body>
+  <h1>R.A. BOT Chat</h1>
+  <div id="chat"></div>
+  <input id="input" placeholder="Escreva aqui..." /><button id="send">Enviar</button>
+  <script>
+    const chat = document.getElementById('chat');
+    document.getElementById('send').onclick = async () => {
+      const text = document.getElementById('input').value;
+      if(!text) return;
+      const u = document.createElement('div'); u.className='msg user'; u.textContent = text;
+      chat.appendChild(u);
+      document.getElementById('input').value='';
+      const res = await fetch('/webhook-chat', {
+        method: 'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ text })
+      });
+      const { reply } = await res.json();
+      const b = document.createElement('div'); b.className='msg bot'; b.textContent = reply;
+      chat.appendChild(b);
+      chat.scrollTop = chat.scrollHeight;
+    };
+  </script>
+</body>
+</html>
+<!-- This is a simple chat interface for the R.A. BOT. -->
+<!-- It allows users to send messages and receive replies from the bot. -->
+<!-- The chat messages are displayed in a scrollable area. -->
